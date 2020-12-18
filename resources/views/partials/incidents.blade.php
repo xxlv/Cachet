@@ -12,7 +12,7 @@
                 <div class="col-xs-10 col-xs-offset-2 col-sm-11 col-sm-offset-0">
                     <div class="panel panel-message incident">
                         <div class="panel-heading">
-                            @if($current_user)
+                            @if($currentUser)
                             <div class="pull-right btn-group">
                                 <a href="{{ cachet_route('dashboard.incidents.edit', ['id' => $incident->id]) }}" class="btn btn-default">{{ trans('forms.edit') }}</a>
                                 <a href="{{ cachet_route('dashboard.incidents.delete', ['id' => $incident->id], 'delete') }}" class="btn btn-danger confirm-action" data-method='DELETE'>{{ trans('forms.delete') }}</a>
@@ -33,11 +33,19 @@
                         @if($incident->updates->isNotEmpty())
                         <div class="list-group">
                             @foreach($incident->updates as $update)
-                            <a class="list-group-item" href="{{ $update->permalink }}">
-                                <i class="{{ $update->icon }}" title="{{ $update->human_status }}" data-toggle="tooltip"></i> <strong>{{ Str::limit($update->raw_message, 20) }}</strong>
-                                <small>{{ $update->created_at_diff }}</small>
-                                <span class="ion-ios-arrow-right pull-right"></span>
-                            </a>
+                            <li class="list-group-item incident-update-item">
+                                
+                                <i class="{{ $update->icon }}" title="{{ $update->human_status }}" data-toggle="tooltip"></i>
+                                {!! $update->formatted_message !!}
+                                <small>
+                                    <abbr class="timeago links" data-toggle="tooltip"
+                                        data-placement="right" title="{{ $update->timestamp_formatted }}"
+                                        data-timeago="{{ $update->timestamp_iso }}">
+                                    </abbr>
+                                </small>
+                                <a href="{{ $update->permalink }}" class="pull-right"><span class="ion-ios-arrow-right"></span></a>
+
+                            </li>
                             @endforeach
                         </div>
                         @endif

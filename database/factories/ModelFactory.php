@@ -45,6 +45,7 @@ $factory->define(ComponentGroup::class, function ($faker) {
 $factory->define(Incident::class, function ($faker) {
     return [
         'name'     => $faker->sentence(),
+        'user_id'  => factory(User::class)->create()->id,
         'message'  => $faker->paragraph(),
         'status'   => mt_rand(1, 4),
         'visible'  => 1,
@@ -84,9 +85,11 @@ $factory->define(Metric::class, function ($faker) {
 
 $factory->define(MetricPoint::class, function ($faker) {
     return [
-        'metric_id' => factory(Metric::class)->create()->id,
-        'value'     => mt_rand(1, 100),
-        'counter'   => 1,
+        'metric_id'  => factory(Metric::class)->create()->id,
+        'value'      => mt_rand(1, 100),
+        'counter'    => 1,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
     ];
 });
 
@@ -101,8 +104,15 @@ $factory->define(Schedule::class, function ($faker) {
 
 $factory->define(Setting::class, function ($faker) {
     return [
-       'name'  => 'app_name',
-       'value' => 'Cachet Test Demo',
+        'name'  => 'app_name',
+        'value' => 'Cachet Test Demo',
+    ];
+});
+
+$factory->define(Setting::class, function ($faker) {
+    return [
+        'name'  => 'app_refresh_rate',
+        'value' => '0',
     ];
 });
 

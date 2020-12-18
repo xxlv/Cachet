@@ -16,14 +16,14 @@ use CachetHQ\Cachet\Models\Invite;
 /**
  * This is the user was invited event class.
  *
- * @author Joseph Cohen <joealt-three.com>
+ * @author Joseph Cohen <joe@alt-three.com>
  * @author Graham Campbell <graham@alt-three.com>
  * @author James Brooks <james@alt-three.com>
  */
 final class UserWasInvitedEvent implements UserEventInterface
 {
     /**
-     * The invite that has been added.
+     * The invite that has been created.
      *
      * @var \CachetHQ\Cachet\Models\Invite
      */
